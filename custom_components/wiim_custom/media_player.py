@@ -114,14 +114,14 @@ SOURCES_MAP = {'-1': 'Idle',
                '1': 'Airplay', 
                '2': 'DLNA',
                '3': 'Amazon',
-			   '4': '???',
+               '4': '???',
                '5': 'Chromecast',
                '10': 'Network',
                '20': 'Network',			   
                '31': 'Spotify',
                '32': 'TIDAL',
-			   '33': 'Roon',
-			   '34': 'Squeezelite',
+               '33': 'Roon',
+               '34': 'Squeezelite',
                '40': 'Analog',
                '41': 'Bluetooth',
                '43': 'Toslink',	
@@ -131,6 +131,7 @@ SOURCES_MAP = {'-1': 'Idle',
 SOURCES_IDLE = ['-1', '0', '99']
 SOURCES_LIVEIN = ['40', '41', '43', '49']
 SOURCES_STREAM = ['1', '2', '3', '4', '5', '10', '20', '33', '34']
+
 SOURCES_CONNECT = ['31', '32']
 
 PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
@@ -489,7 +490,6 @@ class WiiMDevice(MediaPlayerEntity):
                 2: RepeatMode.ALL,
                 5: RepeatMode.ONE,
             }.get(self._player_statdata['LoopMode'], RepeatMode.OFF)
-
             
             if self._player_statdata['PlayType'] in SOURCES_IDLE or self._player_statdata['CurrentTransportState'] in ['STOPPED', 'NO_MEDIA_PRESENT']: 
                 if utcnow() >= (self._idletime_updated_at + AUTOIDLE_STATE_TIMEOUT):
@@ -803,6 +803,7 @@ class WiiMDevice(MediaPlayerEntity):
         if self._media_image_url:
             attributes[ATTR_ART_URL] = self._media_image_url
 
+
         if DEBUGSTR_ATTR:
             atrdbg = ""
 
@@ -988,6 +989,7 @@ class WiiMDevice(MediaPlayerEntity):
 
         if not (media_type in [MediaType.MUSIC, MediaType.URL] or media_source.is_media_source_id(media_id)):
             _LOGGER.warning("For: %s Invalid media type %s. Only %s and %s is supported", self._name, media_type, MediaType.MUSIC, MediaType.URL)
+
             await self.async_media_stop()
             return False
             
@@ -1039,13 +1041,12 @@ class WiiMDevice(MediaPlayerEntity):
         if media_id_check.startswith('http'):
             media_type = MediaType.URL
 
-
         if not media_type in [MediaType.URL]:
             _LOGGER.warning("For: %s Invalid media type %s. Only %s is supported", self._name, media_type, MediaType.URL)
+
             await self.async_media_stop()
             self._playing_mediabrowser = False
             return False
-
 
         if self._playing_mediabrowser:
             media_id_final = media_id
