@@ -186,7 +186,7 @@ class WiiMDevice(MediaPlayerEntity):
 
     async def async_added_to_hass(self):
         """Record entity."""
-        self.hass.data[DOMAIN].entities.append(self)
+        self.hass.data[DOMAIN]["data"].entities.append(self)
 
 		
     async def call_wiim_httpapi(self, cmd, jsn):
