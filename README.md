@@ -3,23 +3,25 @@ This is a fork of https://github.com/onlyoneme/home-assistant-custom-components-
 This component allows you to integrate control of WiiM Mini, Pro, Pro Plus and Amp devices into your [Home Assistant](http://www.home-assistant.io) smart home system. Originally developed for LinkPlay devices by @nicjo814, @limych and @nagyrobi, later forked by @onlyoneme.
 
 ## Installation
-* Copy all files in `custom_components/wiim_custom_ng` to your `<config directory>/custom_components/wiim_custom_ng/` directory.
-* Restart Home-Assistant.
-* In HASS settings search for WiiM and fill in the settings described below
 
-### Settings
+### Using HACS
+* Add this repository (https://github.com/m-stefanski/home-assistant-custom-components-wiim-ng) to custom repositories with `Integration` type
+* Search for `WiiM devices` integration in HACS and download it
 
-**host:**  
-  *(string)* *(Required)* The IP address of the WiiM unit. Make sure it gets the same IP via static lease.
+### Manual
+* Copy all files in `custom_components/wiim_custom_ng` to your `<config directory>/custom_components/wiim_custom_ng/` directory
+* Restart HomeAssistant
 
-**name:**  
-  *(string)* *(Required)* Name that Home Assistant will generate the `entity_id` based on. It is also the base of the friendly name seen in the dashboard, but will be overriden by the device name set in the smartphone WiiM app.
+## Configuration
 
-**uuid:**  
-  *(string)* *(Optional)* Hardware UUID of the player. Can be read out from the attibutes of the entity. Set it manually to that value to handle double-added entity cases when Home Assistant starts up without the WiiM device being on the network at that moment.
-  
-**volume_step:**  
-  *(integer)* *(Optional)* Step size in percent to change volume when calling `volume_up` or `volume_down` service against the media player. Defaults to `5`, can be a number between `1` and `25`.
+After installation, search for `WiiM` in Home Assistant Integrations and fill in the options:
+
+field | type | necessity | description 
+--- | --- | --- | ---
+host | string | Required | The IP address of the WiiM unit. Make sure it gets the same IP via static lease.
+name | string| Required | Name that Home Assistant will generate the `entity_id` based on. It is also the base of the friendly name seen in the dashboard, but will be overriden by the device name set in the smartphone WiiM app.
+uuid | string | Optional | Hardware UUID of the player. Can be read out from the attibutes of the entity. Set it manually to that value to handle double-added entity cases when Home Assistant starts up without the WiiM device being on the network at that moment.
+volume_step | integer | Optional | Step size in percent to change volume when calling `volume_up` or `volume_down` service against the media player. Defaults to `5`, can be a number between `1` and `25`.
 
 ## Home Assistant component authors & contributors
     "@nicjo814",
